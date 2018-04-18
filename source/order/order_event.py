@@ -18,20 +18,21 @@ class OrderEvent(Event):
         self.server_order_id = -1
         self.client_order_id = -1
         self.broker_order_id = -1
-        self.full_symbol =  ''
         self.order_type = OrderType.MARKET
         self.order_flag = OrderFlag.OPEN
         self.order_status = OrderStatus.UNKNOWN
+        self.full_symbol =  ''
+        self.order_size = 0         # short < 0, long > 0
         self.limit_price = 0.0
         self.stop_price = 0.0
-        self.order_size = 0         # short < 0, long > 0
-        self.fill_price = 0.0
         self.fill_size = 0
+        self.fill_price = 0.0
         self.create_time = None
         self.fill_time = None
         self.cancel_time = None
         self.account = ''
         self.source = -1              # sid
+        self.timestamp = ''
 
     def serialize(self):
         msg = ''

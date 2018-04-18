@@ -34,7 +34,7 @@ class OrderManager(object):
         if o.client_order_id < 0:         # client_order_id not yet assigned
             o.client_order_id = self._client_order_id
             o.order_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
-            o.status = OrderStatus.NEWBORN
+            o.order_status = OrderStatus.NEWBORN
             self._client_order_id = self._client_order_id + 1
             self.order_dict[o.client_order_id] = o
 
@@ -83,9 +83,9 @@ class OrderManager(object):
             self.fill_dict[fill_event.broker_fill_id] = fill_event
 
         if fill_event.client_order_id in self.order_dict:
-            self.order_dict[fill_event.client_order_id].order_size -= fill_event.fill_size
+            self.order_dict[fill_event.client_order_id].order_size -= fill_event.fill_size         # adjust it or keep it as original?
             self.order_dict[fill_event.client_order_id].fill_size += fill_event.fill_size
-            self.order_dict[fill_event.client_order_id].filled_price = fill_event.fill_price
+            self.order_dict[fill_event.client_order_id].fill_price = fill_event.fill_price
 
             if (self.order_dict[fill_event.client_order_id].fill_size == 0):
                 self.order_dict[fill_event.client_order_id].order_status = OrderStatus.FILLED

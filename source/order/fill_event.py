@@ -26,6 +26,7 @@ class FillEvent(Event):
         self.commission = 0.0
         self.account = ''
         self.source = -1
+        self.api = ''
 
     def to_position(self):
         """

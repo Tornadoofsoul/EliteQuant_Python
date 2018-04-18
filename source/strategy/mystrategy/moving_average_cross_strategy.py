@@ -23,6 +23,7 @@ class MovingAverageCrossStrategy(StrategyBase):
         self.bars = 0
         self.invested = False
         self.prices = []
+        self.symbols = ['AAPL']
 
     def on_bar(self, bar_event):
         symbol = self.symbols[0]

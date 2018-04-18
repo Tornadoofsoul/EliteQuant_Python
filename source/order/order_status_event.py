@@ -20,18 +20,19 @@ class OrderStatusEvent(Event):
         self.server_order_id = -1
         self.client_order_id = -1
         self.broker_order_id = -1
+        self.order_flag = OrderFlag.OPEN
+        self.order_status = OrderStatus.UNKNOWN
         self.full_symbol = ''
         self.order_size = 0
-        self.order_flag = OrderFlag.OPEN
         self.limit_price = 0.0
         self.stop_price = 0.0
         self.fill_size = 0
         self.fill_price = 0.0
-        self.create_time = ''
-        self.cancel_time = ''
+        self.create_time = None
+        self.fill_time = None
+        self.cancel_time = None
         self.account = ''
         self.api = ''
-        self.order_status = OrderStatus.UNKNOWN
         self.timestamp = ''
 
     def deserialize(self, msg):
@@ -68,7 +69,7 @@ class OrderStatusEvent(Event):
         o.fill_price = self.fill_price
         o.fill_size = self.fill_size
         o.create_time = self.create_time
-        o.fill_time = ''
+        o.fill_time = self.fill_time
         o.cancel_time = self.cancel_time
         o.account =  self.account
         o.source = -1  # sid

@@ -86,7 +86,7 @@ class Backtest(object):
         if not strategyClass:
             print(u'can not find strategy：%s' % strategy_name)
             return
-        self._strategy = strategyClass(self._symbols, self._events_engine)
+        self._strategy = strategyClass(self._events_engine)
         self._strategy.on_init()
         self._strategy.on_start()
 

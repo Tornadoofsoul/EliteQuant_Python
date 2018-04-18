@@ -65,10 +65,12 @@ class BacktestBrokerage(BrokerageBase):
 
         fill = FillEvent()
         fill.client_order_id = order_event.client_order_id
-        fill.broker_order_id = order_event.broker_order_id
-        fill.timestamp = self._data_board.get_last_timestamp(order_event.full_symbol)
+        fill.server_order_id = order_event.client_order_id
+        fill.broker_order_id = order_event.client_order_id
+        fill.broker_fill_id = order_event.client_order_id
+        fill.fill_time = self._data_board.get_last_timestamp(order_event.full_symbol)
         fill.full_symbol = order_event.full_symbol
-        fill.fill_size = order_event.size
+        fill.fill_size = order_event.order_size
         ## TODO: use bid/ask to fill short/long
         fill.fill_price = self._data_board.get_last_price(order_event.full_symbol)
         fill.exchange = 'BACKTEST'
